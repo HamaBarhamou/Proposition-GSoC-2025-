@@ -41,7 +41,7 @@ Model.objects.bulk_create(
 💬 **186 commentaires traités**  
 
 ### **Retours clés des core developers**  
-Merci à @kezabelle, @shangxiao, @bcail, @ngnpope, @felixxm et @sarahboyce pour leurs retours très constructifs.  
+Merci à @kezabelle, @shangxiao, @bcail, @ngnpope, @felixxm, @sarahboyce et @nessita pour leurs retours très constructifs.  
 
 ---
 
