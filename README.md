@@ -1,22 +1,22 @@
-# **Proposition GSoC 2025 : Finalisation de la clause WHERE conditionnelle pour `bulk_create()` (Ticket #34277)**  
+# **GSoC 2025 Proposal: Finalizing the Conditional WHERE Clause for `bulk_create()` (Ticket #34277)**  
 
-## **Contexte Technique**  
+## **Technical Context**  
 
-### **Origine du projet**  
-Cette proposition s'inscrit dans la continuité de [ma proposition GSoC 2024](https://forum.djangoproject.com/t/gsoc-2024-proposal-significant-enhancement-of-djangos-bulk-create/29306/2), où j'avais identifié plusieurs améliorations potentielles pour `bulk_create()`.  
-N'ayant pas pu soumissionner au GSoC 2024 en raison d'un manque de temps et de la complexité de ma proposition initiale, je préfère aujourd’hui me concentrer sur la finalisation de l’implémentation du ticket **#34277**, qui me semble prioritaire.  
+### **Project Background**  
+This proposal continues the work from [my GSoC 2024 proposal](https://forum.djangoproject.com/t/gsoc-2024-proposal-significant-enhancement-of-djangos-bulk-create/29306/2), where I identified several potential improvements for `bulk_create()`.  
+Since I was unable to submit my proposal for GSoC 2024 due to time constraints and the complexity of my initial idea, I now prefer to focus on finalizing the implementation of **ticket #34277**, which I consider a priority.  
 
-### **Description technique**  
-L'objectif est d'implémenter une **clause WHERE conditionnelle** pour les opérations **UPSERT** via `bulk_create()`, permettant ainsi un contrôle plus précis des mises à jour.  
+### **Technical Description**  
+The goal is to implement a **conditional WHERE clause** for **UPSERT** operations via `bulk_create()`, allowing for more precise control over updates.  
 
-#### **Exemples d'utilisation** :  
+#### **Usage Examples**:  
 ```python
 Model.objects.bulk_create(
     updated_items,
     update_conflicts=True,
     update_fields=["name", "rank"],
     unique_fields=["number"],
-    condition=Q(rank__gt=F("number") + 1) & ~Q(name__startswith="A") | Q(number__gt=3),  # Nouveau
+    condition=Q(rank__gt=F("number") + 1) & ~Q(name__startswith="A") | Q(number__gt=3),  # New
 )
 ```
 ```python
@@ -25,48 +25,48 @@ Model.objects.bulk_create(
     update_conflicts=True,
     update_fields=["name", "rank"],
     unique_fields=["number"],
-    condition=Q(rank__lt=Excluded("rank")),  # Nouveau
+    condition=Q(rank__lt=Excluded("rank")),  # New
 )
 ```
 
 ---
 
-## **État d'Avancement**  
+## **Current Progress**  
 
-### **Travail existant (PR #17515)**  
-✅ Implémentation de base pour **PostgreSQL** et **SQLite**  
-✅ Introduction de la classe `Excluded`  
-✅ Support des expressions `Q()` et `F()`  
-📊 **14 fichiers modifiés** (+379/-10 lignes)  
-💬 **186 commentaires traités**  
+### **Existing Work (PR #17515)**  
+✅ Basic implementation for **PostgreSQL** and **SQLite**  
+✅ Introduction of the `Excluded` class  
+✅ Support for `Q()` and `F()` expressions  
+📊 **14 files modified** (+379/-10 lines)  
+💬 **186 comments addressed**  
 
-### **Retours clés des core developers**  
-Merci à @kezabelle, @shangxiao, @bcail, @ngnpope, @felixxm, @sarahboyce et @nessita pour leurs retours très constructifs.  
-
----
-
-## **Objectifs**  
-Finaliser l'implémentation de cette fonctionnalité et garantir son intégration dans Django.  
+### **Key Feedback from Core Developers**  
+Special thanks to @kezabelle, @shangxiao, @bcail, @ngnpope, @felixxm, @sarahboyce, and @nessita for their valuable feedback.  
 
 ---
 
-## **Plan de Travail (12 semaines)**  
-
-### **Phase 1 : Préparation (3 semaines)**  
-- Analyse approfondie des commentaires existants  
-- Refactoring et optimisation de l'implémentation actuelle  
-
-### **Phase 2 : Développement (9 semaines)**  
-- Itérations de développement  
-- Revue de code et intégration des retours  
-- Tests et documentation  
+## **Objectives**  
+Finalize the implementation of this feature and ensure its integration into Django.  
 
 ---
 
-## **Valeur Ajoutée**  
+## **Work Plan (12 Weeks)**  
 
-### **Pour les développeurs**  
-#### **Exemple réel d'utilisation**  
+### **Phase 1: Preparation (3 Weeks)**  
+- In-depth analysis of existing comments  
+- Refactoring and optimization of the current implementation  
+
+### **Phase 2: Development (9 Weeks)**  
+- Iterative development  
+- Code review and integration of feedback  
+- Testing and documentation  
+
+---
+
+## **Added Value**  
+
+### **For Developers**  
+#### **Real-world Usage Example**  
 ```python
 Product.objects.bulk_create(
     products,
@@ -78,34 +78,33 @@ Product.objects.bulk_create(
 )
 ```
 
-### **Avantages concrets**  
-✅ **Gain de précision** dans les mises à jour  
-✅ **Réduction des opérations superflues**  
-✅ **Meilleur contrôle des conflits**  
+### **Key Benefits**  
+✅ **More precise updates**  
+✅ **Reduction of unnecessary operations**  
+✅ **Better conflict management**  
 
 ---
 
-## **Engagement Communautaire**  
+## **Community Engagement**  
 
-### **Contributions existantes**  
-🔹 32 commits documentés  
-🔹 86 réponses aux commentaires  
-🔹 Couverture de tests atteignant **89% des cas d’usage**  
+### **Existing Contributions**  
+🔹 32 documented commits  
+🔹 86 responses to comments  
+🔹 Test coverage reaching **89% of use cases**  
 
 ---
 
-## **À Propos de Moi**  
+## **About Me**  
 
 👤 **Issaka Hama Barhamou**  
 🔗 [LinkedIn](https://www.linkedin.com/in/barhamou-issaka-hama-90047b179/)  
 
-### **Parcours**  
-- **Développeur backend spécialisé en Django**  
-- **Formation ALX Africa en ingénierie logicielle**  
-- **Contributeur actif à Django depuis 2023**  
+### **Background**  
+- **Backend developer specializing in Django**  
+- **ALX Africa Software Engineering Training**  
+- **Active Django contributor since 2023**  
 
 ### **Motivation**  
-💡 **Résoudre des problèmes concrets** de l'ORM Django  
-💡 **Améliorer l’expérience développeur**  
-💡 **Contribuer à un projet open-source majeur**  
-
+💡 **Solving real-world ORM issues** in Django  
+💡 **Enhancing the developer experience**  
+💡 **Contributing to a major open-source project**  
